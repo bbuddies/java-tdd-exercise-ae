@@ -2,10 +2,14 @@ package com.odde.tdd;
 
 public class EmailNotification {
 
-    private final MailService mailService;
+    private final Outbox outbox;
 
     public EmailNotification() {
-        mailService = new MailService();
+        outbox = new MailService();
+    }
+
+    public EmailNotification(Outbox outbox) {
+        this.outbox = outbox;
     }
 
     public void welcome(String email) {
@@ -14,6 +18,6 @@ public class EmailNotification {
         mail.setTo(email);
         mail.setTitle("Welcome");
         mail.setContent("Hello");
-        mailService.send(mail);
+        outbox.send(mail);
     }
 }
