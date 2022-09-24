@@ -7,18 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BudgetCalculate {
-    List<Budget> budgetList;
+    private final BudgetRepo repo;
 
-    public BudgetCalculate() {
-        budgetList = new ArrayList<>();
-        budgetList.add(new Budget(YearMonth.of(2022, 9), 3000));
-        budgetList.add(new Budget(YearMonth.of(2022, 10), 310));
-        budgetList.add(new Budget(YearMonth.of(2022, 11), 60));
-        budgetList.add(new Budget(YearMonth.of(2022, 12), 31));
-        budgetList.add(new Budget(YearMonth.of(2023, 1), 3100));
+    public BudgetCalculate(BudgetRepo repo) {
+        this.repo = repo;
     }
 
-    public Integer getBudget (LocalDate start, LocalDate end) {
+    public long getBudget (LocalDate start, LocalDate end) {
+        List<Budget> budgetList = repo.findAll();
         if (null == start || null == end || start.isAfter(end)) {
             return 0;
         }
@@ -60,6 +56,6 @@ public class BudgetCalculate {
             }
         }
 
-        return (int)budget;
+        return budget;
     }
 }
