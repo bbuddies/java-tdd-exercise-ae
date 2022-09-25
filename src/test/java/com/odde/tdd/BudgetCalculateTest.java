@@ -98,4 +98,6 @@ public class BudgetCalculateTest {
         Integer budget = budgetCalculate.getBudget(start, end);
         assertEquals(2408, budget);
     }
+
+    //
 }
